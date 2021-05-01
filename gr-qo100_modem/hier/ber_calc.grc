@@ -36,7 +36,7 @@ blocks:
   id: variable
   parameters:
     comment: Change this to point to the file containing the transmit data!!!
-    value: '''/home/daniel/qo100-modem/apsk32_data.u8'''
+    value: '''/home/daniel/qo100-modem/32apsk/apsk32_data.u8'''
   states:
     bus_sink: false
     bus_source: false
