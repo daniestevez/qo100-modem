@@ -1,0 +1,11 @@
+This is the qo100_modem-write-a-block package meant as a guide to building
+out-of-tree packages. To use the qo100_modem blocks, the Python namespaces
+is in 'qo100_modem', which is imported as:
+
+    import qo100_modem
+
+See the Doxygen documentation for details about the blocks available
+in this package. A quick listing of the details can be found in Python
+after importing by using:
+
+    help(qo100_modem)

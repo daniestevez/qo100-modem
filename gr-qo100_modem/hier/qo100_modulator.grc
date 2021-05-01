@@ -1,0 +1,218 @@
+options:
+  parameters:
+    author: Daniel Estevez
+    catch_exceptions: 'True'
+    category: '[QO-100 modem]'
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: hb
+    hier_block_src_path: '.:'
+    id: qo100_modulator
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: QO-100 32APSK+pilot modulator
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: nfilt
+  id: variable
+  parameters:
+    comment: ''
+    value: '64'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [856, 244.0]
+    rotation: 0
+    state: true
+- name: blocks_stream_mux_0
+  id: blocks_stream_mux
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    lengths: (1, constants.tdm_rate - 1)
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [712, 328.0]
+    rotation: 0
+    state: enabled
+- name: blocks_vector_source_x_0
+  id: blocks_vector_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    repeat: 'True'
+    tags: '[]'
+    type: byte
+    vector: constants.pilot_prbs
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [240, 268.0]
+    rotation: 0
+    state: enabled
+- name: digital_constellation_encoder_bc_0
+  id: digital_constellation_encoder_bc
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: 32APSK data symbols
+    constellation: constants.constellation_32apsk
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [464, 388.0]
+    rotation: 0
+    state: true
+- name: digital_constellation_encoder_bc_1
+  id: digital_constellation_encoder_bc
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: BPSK pilot symbols
+    constellation: constants.constellation_bpsk
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [456, 284.0]
+    rotation: 0
+    state: enabled
+- name: digital_map_bb_0
+  id: digital_map_bb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    map: constants.symbol_map_rev_32apsk
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [240, 388.0]
+    rotation: 0
+    state: true
+- name: import_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: from qo100_modem import constants
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [208, 20.0]
+    rotation: 0
+    state: true
+- name: pad_sink_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1128, 340.0]
+    rotation: 0
+    state: true
+- name: pad_source_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: data_in
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [80, 388.0]
+    rotation: 0
+    state: true
+- name: pfb_arb_resampler_xxx_0
+  id: pfb_arb_resampler_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    atten: '100'
+    comment: RRC filter and resample
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    nfilts: nfilt
+    rrate: constants.sps
+    samp_delay: '0'
+    taps: firdes.root_raised_cosine(nfilt, nfilt, 1, constants.rrc_alpha, nfilt *
+      47)
+    type: ccf
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [856, 316.0]
+    rotation: 0
+    state: enabled
+
+connections:
+- [blocks_stream_mux_0, '0', pfb_arb_resampler_xxx_0, '0']
+- [blocks_vector_source_x_0, '0', digital_constellation_encoder_bc_1, '0']
+- [digital_constellation_encoder_bc_0, '0', blocks_stream_mux_0, '1']
+- [digital_constellation_encoder_bc_1, '0', blocks_stream_mux_0, '0']
+- [digital_map_bb_0, '0', digital_constellation_encoder_bc_0, '0']
+- [pad_source_0, '0', digital_map_bb_0, '0']
+- [pfb_arb_resampler_xxx_0, '0', pad_sink_0, '0']
+
+metadata:
+  file_format: 1

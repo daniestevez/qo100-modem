@@ -1,0 +1,526 @@
+options:
+  parameters:
+    author: Daniel Estevez
+    catch_exceptions: 'True'
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: qt_gui
+    hier_block_src_path: '.:'
+    id: qo100_test
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: QO-100 modem over-the-air test
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: center_freq
+  id: variable
+  parameters:
+    comment: ''
+    value: 750e3
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [632, 100.0]
+    rotation: 0
+    state: enabled
+- name: down_freq
+  id: variable_qtgui_entry
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: Downlink Frequency (offset from 10489 MHz)
+    type: real
+    value: 641.5e3
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [304, 100.0]
+    rotation: 0
+    state: enabled
+- name: gain
+  id: variable_qtgui_entry
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: TX gain
+    type: real
+    value: '0.41'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [488, 100.0]
+    rotation: 0
+    state: enabled
+- name: lowpass_taps
+  id: variable_low_pass_filter_taps
+  parameters:
+    beta: '6.76'
+    comment: ''
+    cutoff_freq: 3.5e3
+    gain: '1.0'
+    samp_rate: 600e3
+    width: 56.5e3
+    win: window.WIN_HAMMING
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [536, 444.0]
+    rotation: 0
+    state: enabled
+- name: samp_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: '8000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [200, 12.0]
+    rotation: 0
+    state: enabled
+- name: symbol_sync_bw
+  id: variable_qtgui_entry
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: Symbol sync BW
+    type: real
+    value: '0.01'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [768, 20.0]
+    rotation: 0
+    state: true
+- name: tune
+  id: variable_qtgui_entry
+  parameters:
+    comment: ''
+    gui_hint: 0,0
+    label: Tune frequency (Hz)
+    type: real
+    value: '-125'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [304, 12.0]
+    rotation: 0
+    state: true
+- name: analog_random_source_x_0
+  id: analog_random_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    max: '32'
+    maxoutbuf: '0'
+    min: '0'
+    minoutbuf: '0'
+    num_samps: '100000'
+    repeat: 'True'
+    type: byte
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [64, 132.0]
+    rotation: 0
+    state: disabled
+- name: analog_sig_source_x_0
+  id: analog_sig_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    amp: gain
+    comment: ''
+    freq: down_freq - center_freq
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    phase: '0'
+    samp_rate: 600e3
+    type: complex
+    waveform: analog.GR_COS_WAVE
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [544, 300.0]
+    rotation: 0
+    state: enabled
+- name: blocks_complex_to_interleaved_short_0
+  id: blocks_complex_to_interleaved_short
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    scale_factor: '1.0'
+    vector_output: 'False'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1088, 276.0]
+    rotation: 0
+    state: enabled
+- name: blocks_file_source_0
+  id: blocks_file_source
+  parameters:
+    affinity: ''
+    alias: ''
+    begin_tag: pmt.PMT_NIL
+    comment: Change this to point to the file containing the transmit data!!!
+    file: /home/daniel/qo100-modem/apsk32_data.u8
+    length: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    repeat: 'True'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [16, 236.0]
+    rotation: 0
+    state: true
+- name: blocks_interleaved_short_to_complex_0
+  id: blocks_interleaved_short_to_complex
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    scale_factor: '1.0'
+    swap: 'False'
+    vector_input: 'False'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [368, 596.0]
+    rotation: 0
+    state: enabled
+- name: blocks_keep_m_in_n_0
+  id: blocks_keep_m_in_n
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    m: 1392//2
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    n: (24+1392)//2
+    offset: 24//2
+    type: short
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [232, 588.0]
+    rotation: 0
+    state: enabled
+- name: blocks_multiply_const_vxx_1
+  id: blocks_multiply_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: 2**15
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [920, 284.0]
+    rotation: 0
+    state: enabled
+- name: blocks_multiply_xx_0
+  id: blocks_multiply_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [808, 272.0]
+    rotation: 0
+    state: enabled
+- name: blocks_udp_source_0
+  id: blocks_udp_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    eof: 'False'
+    ipaddr: 0.0.0.0
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    port: '50100'
+    psize: '1472'
+    type: short
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [24, 580.0]
+    rotation: 0
+    state: enabled
+- name: freq_xlating_fir_filter_xxx_0
+  id: freq_xlating_fir_filter_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    center_freq: down_freq - center_freq + tune
+    comment: ''
+    decim: '5'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: 600e3
+    taps: lowpass_taps
+    type: ccc
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [536, 596.0]
+    rotation: 0
+    state: enabled
+- name: import_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import numpy as np
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [488, 20.0]
+    rotation: 0
+    state: true
+- name: import_1
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: from qo100_modem import constants
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [600, 20.0]
+    rotation: 0
+    state: true
+- name: low_pass_filter_0
+  id: low_pass_filter
+  parameters:
+    affinity: ''
+    alias: ''
+    beta: '6.76'
+    comment: ''
+    cutoff_freq: 3.5e3
+    decim: '15'
+    gain: 4e-2
+    interp: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: 120e3
+    type: fir_filter_ccf
+    width: 1e3
+    win: window.WIN_HAMMING
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [760, 572.0]
+    rotation: 0
+    state: enabled
+- name: network_tcp_sink_0
+  id: network_tcp_sink
+  parameters:
+    addr: transceiver_host
+    affinity: ''
+    alias: ''
+    comment: ''
+    mode: '1'
+    port: transceiver_port
+    type: short
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1188.0, 384]
+    rotation: 270
+    state: true
+- name: network_udp_source_0
+  id: network_udp_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    header: '0'
+    ipv6: 'False'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    notify_missed: 'False'
+    payloadsize: '1472'
+    port: '50100'
+    src_zeros: 'False'
+    type: short
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [24, 444.0]
+    rotation: 0
+    state: disabled
+- name: qo100_demodulator_gui_0
+  id: qo100_demodulator_gui
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    gui_hint: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    symbol_sync_bw: symbol_sync_bw
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [936, 608.0]
+    rotation: 0
+    state: true
+- name: qo100_modulator_0
+  id: qo100_modulator
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [272, 224.0]
+    rotation: 0
+    state: true
+- name: rational_resampler_xxx_0
+  id: rational_resampler_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    decim: '1'
+    fbw: '0'
+    interp: '75'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    taps: '[]'
+    type: ccc
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [560, 196.0]
+    rotation: 0
+    state: true
+- name: transceiver_host
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: ''
+    short_id: ''
+    type: str
+    value: 10.203.134.11
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [968, 20.0]
+    rotation: 0
+    state: true
+- name: transceiver_port
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: ''
+    short_id: ''
+    type: intx
+    value: '6000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [968, 116.0]
+    rotation: 0
+    state: true
+
+connections:
+- [analog_random_source_x_0, '0', qo100_modulator_0, '0']
+- [analog_sig_source_x_0, '0', blocks_multiply_xx_0, '1']
+- [blocks_complex_to_interleaved_short_0, '0', network_tcp_sink_0, '0']
+- [blocks_file_source_0, '0', qo100_modulator_0, '0']
+- [blocks_interleaved_short_to_complex_0, '0', freq_xlating_fir_filter_xxx_0, '0']
+- [blocks_keep_m_in_n_0, '0', blocks_interleaved_short_to_complex_0, '0']
+- [blocks_multiply_const_vxx_1, '0', blocks_complex_to_interleaved_short_0, '0']
+- [blocks_multiply_xx_0, '0', blocks_multiply_const_vxx_1, '0']
+- [blocks_udp_source_0, '0', blocks_keep_m_in_n_0, '0']
+- [freq_xlating_fir_filter_xxx_0, '0', low_pass_filter_0, '0']
+- [low_pass_filter_0, '0', qo100_demodulator_gui_0, '0']
+- [network_udp_source_0, '0', blocks_keep_m_in_n_0, '0']
+- [qo100_modulator_0, '0', rational_resampler_xxx_0, '0']
+- [rational_resampler_xxx_0, '0', blocks_multiply_xx_0, '0']
+
+metadata:
+  file_format: 1

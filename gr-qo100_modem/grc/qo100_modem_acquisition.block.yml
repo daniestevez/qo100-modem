@@ -1,0 +1,40 @@
+id: qo100_modem_acquisition
+label: Pilot PRBS acquisition
+category: '[QO-100 modem]'
+
+templates:
+  imports: import qo100_modem
+  make: qo100_modem.acquisition(${prbs}, ${tdm_rate}, ${fft_oversample}, ${threshold})
+
+parameters:
+- id: prbs
+  label: PRBS
+  dtype: float_vector
+- id: tdm_rate
+  label: TDM rate
+  dtype: int
+- id: fft_oversample
+  label: FFT oversample
+  dtype: int
+  default: 2
+- id: threshold
+  label: Threshold
+  dtype: float
+  default: 20.0
+
+inputs:
+- domain: stream
+  dtype: complex
+- domain: message
+  id: resync
+  optional: true
+
+outputs:
+- domain: stream
+  dtype: complex
+- label: fft
+  domain: stream
+  dtype: complex
+  optional: true
+
+file_format: 1

@@ -1,0 +1,29 @@
+id: qo100_modem_pilot_pll
+label: Pilot symbol PLL
+category: '[QO-100 modem]'
+
+templates:
+  imports: import qo100_modem
+  make: qo100_modem.pilot_pll(${prbs}, ${tdm_rate})
+
+parameters:
+- id: prbs
+  label: PRBS
+  dtype: float_vector
+- id: tdm_rate
+  label: TDM rate
+  dtype: int
+
+inputs:
+- domain: stream
+  dtype: complex
+
+outputs:
+- label: data
+  domain: stream
+  dtype: complex
+- label: pilot
+  domain: stream
+  dtype: complex
+
+file_format: 1
