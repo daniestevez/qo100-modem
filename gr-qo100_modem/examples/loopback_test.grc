@@ -101,7 +101,7 @@ blocks:
     alias: ''
     begin_tag: pmt.PMT_NIL
     comment: Change this to point to the file containing the transmit data!!!
-    file: /home/daniel/qo100-modem/apsk32_data.u8
+    file: /home/daniel/qo100-modem/32apsk/apsk32_data.u8
     length: '0'
     maxoutbuf: '0'
     minoutbuf: '0'

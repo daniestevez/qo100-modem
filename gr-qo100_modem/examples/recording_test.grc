@@ -103,7 +103,7 @@ blocks:
     alias: ''
     begin_tag: pmt.PMT_NIL
     comment: Change this to point to the file containing the IQ data!!!
-    file: /home/daniel/qo100-modem/32apsk_qo100_2021-04-11T13:17:58.710957_8ksps.c64
+    file: /home/daniel/qo100-modem/32apsk/32apsk_qo100_2021-04-11T13:17:58.710957_8ksps.c64
     length: '0'
     maxoutbuf: '0'
     minoutbuf: '0'
