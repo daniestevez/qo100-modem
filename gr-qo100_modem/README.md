@@ -36,6 +36,12 @@ make
 sudo make install
 ```
 
+Some data paths need to be adjusted to point to the data files in these
+repository. Look in
+* `hier/ber_calc.grc`
+* `examples/loopback_test.grc`
+* `examples/qo100_test.grc`
+
 After installation, it is necessary to open each of the hierarchical flowgraphs
 in the `hier/` folder with `gnuradio-companion` and click the "Generate the
 flowgraph" button. There is a bug in the generation of the demodulator GUI
