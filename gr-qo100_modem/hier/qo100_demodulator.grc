@@ -75,7 +75,7 @@ blocks:
     resamp_type: digital.IR_PFB_MF
     sps: constants.sps
     ted_gain: '0.5'
-    ted_type: digital.TED_SIGNAL_TIMES_SLOPE_ML
+    ted_type: digital.TED_SIGNUM_TIMES_SLOPE_ML
     type: cc
   states:
     bus_sink: false
