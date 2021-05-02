@@ -59,3 +59,8 @@ one included in the `32apsk/` folder of this repository.
 using my
 [qo100-groundstation](https://github.com/daniestevez/qo100-groundstation)
 software stack. This flowgraph should be customized for other groundstations.
+
+## More documentation
+
+Detailed information about the modem design can be found in
+[this blog post](https://destevez.net/2021/05/32apsk-narrowband-modem-for-qo-100/).
