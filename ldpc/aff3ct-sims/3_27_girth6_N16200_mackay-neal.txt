@@ -1,0 +1,90 @@
+[metadata]
+command=/usr/local/bin/aff3ct-3.0.1 --sim-type "BFER" -C "LDPC" --enc-type "LDPC_H" -m "9.0" -M "9.7" -s "0.1" --dec-implem "SPA" --dec-h-path "codes/3_27_girth6_N16200_mackay-neal.alist" -e "100" -i "2000" --dec-type "BP_FLOODING" --mdm-const-path "32apsk.mod" --mdm-type "USER" --mdm-max "MAXSS" 
+title=(3,27) MacKay-Neal girth=6 N=16200
+
+[trace]
+# ----------------------------------------------------
+# ---- A FAST FORWARD ERROR CORRECTION TOOLBOX >> ----
+# ----------------------------------------------------
+# Parameters:
+# * Simulation ------------------------------------
+#    ** Type                      = BFER
+#    ** Type of bits              = int32
+#    ** Type of reals             = float32
+#    ** Date (UTC)                = 2021-07-17 17:15:57
+#    ** Git version               = v3.0.1
+#    ** Code type (C)             = LDPC
+#    ** Noise range               = 9 -> 9.7 dB
+#    ** Noise type (E)            = EBN0
+#    ** Seed                      = 0
+#    ** Statistics                = off
+#    ** Debug mode                = off
+#    ** Inter frame level         = 1
+#    ** Multi-threading (t)       = 16 thread(s)
+#    ** Coset approach (c)        = no
+#    ** Coded monitoring          = no
+#    ** Bad frames tracking       = off
+#    ** Bad frames replay         = off
+#    ** Bit rate                  = 0.888889 (8/9)
+# * Source ----------------------------------------
+#    ** Type                      = RAND
+#    ** Implementation            = STD
+#    ** Info. bits (K_info)       = 14400
+# * Codec -----------------------------------------
+#    ** Type                      = LDPC
+#    ** Info. bits (K)            = 14400
+#    ** Codeword size (N_cw)      = 16200
+#    ** Frame size (N)            = 16200
+#    ** Code rate                 = 0.888889 (8/9)
+# * Encoder ---------------------------------------
+#    ** Type                      = LDPC_H
+#    ** Systematic                = yes
+#    ** H matrix path             = codes/3_27_girth6_N16200_mackay-neal.alist
+#    ** H matrix reordering       = NONE
+#    ** G build method            = IDENTITY
+# * Decoder ---------------------------------------
+#    ** Type (D)                  = BP_FLOODING
+#    ** Implementation            = SPA
+#    ** Systematic                = yes
+#    ** H matrix path             = codes/3_27_girth6_N16200_mackay-neal.alist
+#    ** H matrix reordering       = NONE
+#    ** Num. of iterations (i)    = 2000
+#    ** Stop criterion (syndrome) = on
+#    ** Stop criterion depth      = 1
+# * Modem -----------------------------------------
+#    ** Type                      = USER
+#    ** Implementation            = STD
+#    ** Bits per symbol           = 5
+#    ** Sigma square              = on
+#    ** Max type                  = MAXSS
+# * Channel ---------------------------------------
+#    ** Type                      = AWGN
+#    ** Implementation            = STD
+#    ** Complex                   = on
+#    ** Add users                 = off
+# * Monitor ---------------------------------------
+#    ** Lazy reduction            = off
+#    ** Frame error count (e)     = 100
+#    ** Compute mutual info       = no
+# * Terminal --------------------------------------
+#    ** Show Sigma                = off
+#    ** Enabled                   = yes
+#    ** Frequency (ms)            = 500
+# 
+# The simulation is running...
+# ---------------------||------------------------------------------------------||---------------------
+#  Signal Noise Ratio  ||   Bit Error Rate (BER) and Frame Error Rate (FER)    ||  Global throughput  
+#         (SNR)        ||                                                      ||  and elapsed time   
+# ---------------------||------------------------------------------------------||---------------------
+# ----------|----------||----------|----------|----------|----------|----------||----------|----------
+#     Es/N0 |    Eb/N0 ||      FRA |       BE |       FE |      BER |      FER ||  SIM_THR |    ET/RT 
+#      (dB) |     (dB) ||          |          |          |          |          ||   (Mb/s) | (hhmmss) 
+# ----------|----------||----------|----------|----------|----------|----------||----------|----------
+      15.48 |     9.00 ||      692 |    17855 |      120 | 1.79e-03 | 1.73e-01 ||    0.249 | 00h00'39   
+      15.58 |     9.10 ||     2685 |    16189 |      115 | 4.19e-04 | 4.28e-02 ||    0.833 | 00h00'46   
+      15.68 |     9.20 ||    23137 |    14695 |      105 | 4.41e-05 | 4.54e-03 ||    3.236 | 00h01'42   
+      15.78 |     9.30 ||   247286 |    11880 |      101 | 3.34e-06 | 4.08e-04 ||    5.204 | 00h11'24   
+      15.88 |     9.40 ||  2328131 |     7331 |      100 | 2.19e-07 | 4.30e-05 ||    5.821 | 01h35'58   
+      15.98 |     9.50 ||  7117708 |     1347 |      100 | 1.31e-08 | 1.40e-05 ||    6.246 | 04h33'30   
+      16.08 |     9.60 || 11454702 |      532 |      100 | 3.23e-09 | 8.73e-06 ||    6.651 | 06h53'20   
+# End of the simulation.
